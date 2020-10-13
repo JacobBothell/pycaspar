@@ -90,8 +90,8 @@ class CasparCG:
             xml_string = re.sub(r'(?P<start><|</)(?P<number>[0-9]+?)>', '\g<start>tag\g<number>>', xml_string, 0)
             root = ET.fromstring(xml_string)
             self._layers = {}
-            for child in root.findall("stage/layer/"):
-                layer_id = int(re.match(r'layer_(?P<number>[0-9]+)$', child.tag).group('number'))
+            for child in root.findall("stage/layers/layer"):
+                layer_id = child.find('index').text
                 self._layers[layer_id] = child
 
     @property
